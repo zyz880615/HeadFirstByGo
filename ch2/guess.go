@@ -1,3 +1,4 @@
+// guess challenges players to guess a random number.
 package main
 
 import (
@@ -20,30 +21,41 @@ func main() {
 	target := rand.Intn(100) + 1
 	fmt.Println("I've chosen a random number between 1 and 100.")
 	fmt.Println("Can you guess it?")
-	
+
 	//从键盘读取输入
 	reader := bufio.NewReader(os.Stdin)
+	success := false
+	for guesses := 0; guesses < 10; guesses++ {
+		fmt.Println("You have", 10-guesses, "guesses left.")
+		fmt.Println("Make a guess: ")
+		//读取用户输入的内容，直到按下<Enter>
+		input, err := reader.ReadString('\n')
+		if err != nil {
+			log.Fatal(err)
+		}
 
-	fmt.Println("Make a guess: ")
-	//读取用户输入的内容，直到按下<Enter>
-	input, err := reader.ReadString('\n')
-	if err != nil {
-		log.Fatal(err)
+		//删除换行符
+		input = strings.TrimSpace(input)
+		//将输入字符串转换为整数
+		guess, err := strconv.Atoi(input)
+
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		if guess < target {
+			fmt.Println("Oops. Your guess was LOW.")
+		} else if guess > target {
+			fmt.Println("Oops. Your guess was HIGH.")
+		} else {
+			fmt.Println("Good job! You guessed it!")
+			success = true
+			break
+		}
 	}
-
-	//删除换行符
-	input = strings.TrimSpace(input)
-	//将输入字符串转换为整数
-	guess, err := strconv.Atoi(input)
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	if guess < target {
-		fmt.Println("Oops. Your guess was LOW.")
-	} else if guess > target {
-		fmt.Println("Oops. Your guess was HIGH.")
+	
+	if !success {
+		fmt.Println("Sorry, you didn't guess my number. It was:", target)
 	}
 
 }
