@@ -53,7 +53,7 @@ func main() {
 			break
 		}
 	}
-	
+
 	if !success {
 		fmt.Println("Sorry, you didn't guess my number. It was:", target)
 	}
