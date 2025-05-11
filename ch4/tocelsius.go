@@ -2,7 +2,7 @@
 package main
 
 import (
-	"HeadFirstByGo/ch4/keyboard"
+	"HeadFirstByGo/keyboard"
 	"fmt"
 	"log"
 )
