@@ -2,8 +2,8 @@
 package main
 
 import (
-	"HeadFirstByGo/ch4/keyboard"
 	"fmt"
+	"github.com/zyz880615/HeadFirstByGo/ch4/keyboard"
 	"log"
 )
 
